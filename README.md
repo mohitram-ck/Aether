@@ -68,11 +68,6 @@ npm install
 npm run dev
 ```
 
-### 5. Open in Browser
-| Service | URL |
-|---------|-----|
-| React Dashboard | http://localhost:5173 |
-| API Docs (Swagger) | http://127.0.0.1:8000/docs |
 
 ## 📁 Project Structure
 ```
@@ -112,3 +107,4 @@ aether/
 
 ## 👤 Author
 **Mohit** — [github.com/mohitram-ck](https://github.com/mohitram-ck)
+
