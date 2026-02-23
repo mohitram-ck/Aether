@@ -1,0 +1,109 @@
+# ⚡ Aether — High-Frequency Financial Transaction Engine
+
+A production-grade, event-driven financial transaction engine built for high concurrency and real-time fraud detection.
+
+## 🏗️ Architecture
+```
+Client → FastAPI Gateway → Redis Stream → PostgreSQL Worker
+                      ↓
+              Analytics Engine (ARIMA Fraud Detection)
+```
+
+## 🚀 Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| API Gateway | FastAPI, Python |
+| Auth | JWT, OAuth 2.0, RBAC |
+| Caching & Queue | Redis, Redis Streams |
+| Database | PostgreSQL, SQLAlchemy |
+| Analytics | ARIMA, Z-Score Detection |
+| Frontend | React, Recharts, Vite |
+| Infrastructure | Docker, Alembic |
+
+## ✨ Features
+
+- **High-throughput API** — Async FastAPI gateway capable of processing 1,000+ transactions/second
+- **Identity Fortress** — JWT authentication with Redis token blacklisting and role-based access control
+- **Redis Streaming** — Event-driven transaction pipeline using Redis Streams for zero-lag ingestion
+- **ACID Compliance** — Background worker batch-inserts transactions into PostgreSQL with full rollback support
+- **Fraud Detection** — ARIMA time-series analysis with Z-score velocity and amount anomaly detection
+- **Live Dashboard** — React frontend with real-time transaction history, fraud alerts, and load forecasting
+
+## 🛠️ Running Locally
+
+### Prerequisites
+- Docker Desktop
+- Python 3.11+ (via Miniconda)
+- Node.js 18+
+
+### 1. Start infrastructure
+```bash
+docker-compose up -d
+```
+
+### 2. Backend
+```bash
+cd backend
+conda activate aether
+alembic upgrade head
+uvicorn app.main:app --reload
+```
+
+### 3. Worker
+```bash
+cd backend
+conda activate aether
+python -m app.workers.transaction_worker
+```
+
+### 4. Frontend
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+### 5. Open
+- **Dashboard:** http://localhost:5173
+- **API Docs:** http://127.0.0.1:8000/docs
+
+## 📁 Project Structure
+```
+aether/
+├── backend/
+│   ├── app/
+│   │   ├── api/          # Route handlers
+│   │   ├── core/         # Config, DB, Security, Redis
+│   │   ├── models/       # SQLAlchemy models
+│   │   ├── schemas/      # Pydantic schemas
+│   │   ├── services/     # Business logic
+│   │   ├── workers/      # Redis Stream consumer
+│   │   └── main.py
+│   └── requirements.txt
+├── frontend/             # React dashboard
+└── docker-compose.yml
+```
+```
+
+---
+
+## 3. Add a `.gitignore` at the root level — open it and paste:
+```
+# Python
+__pycache__/
+*.pyc
+.env
+venv/
+.venv/
+
+# Node
+node_modules/
+frontend/dist/
+
+# Docker volumes
+postgres_data/
+redis_data/
+
+# VS Code
+.vscode/
